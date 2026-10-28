@@ -7,7 +7,6 @@ page the desk reads.
 ## The split
 
 | Problem | Reports | Issue |
-|---|---|---|---|
 |---|---|---|
 | A second cause inside the ticket: booking-v3's `MM/DD` hint on day-first tenants | 33 | [#1](../../issues/1) |
 | One-day moves inside the flip count, from the desk's own note | 5 | [#2](../../issues/2) |

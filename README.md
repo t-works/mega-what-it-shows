@@ -7,6 +7,7 @@ page the desk reads.
 ## The split
 
 | Problem | Reports | Issue |
+|---|---|---|---|
 |---|---|---|
 | A second cause inside the ticket: booking-v3's `MM/DD` hint on day-first tenants | 33 | [#1](../../issues/1) |
 | One-day moves inside the flip count, from the desk's own note | 5 | [#2](../../issues/2) |
@@ -14,6 +15,12 @@ page the desk reads.
 | Duplicate rows in the export: 427 rows for 412 reports | 15 | [#4](../../issues/4) |
 
 The parser cause keeps 379 reports, 374 of them after the 5 one-day moves are set aside.
+
+## Outcome
+
+The desk closed #4471 on 5 October: `parser` **fixed** (`fix(dates): parse dd/mm for eu locales`),
+`hint` **won't fix** (booking-v3 form retired). The four issues are closed to match; the page
+carries the same resolution.
 
 ## Files
 

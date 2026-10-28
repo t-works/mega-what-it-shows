@@ -62,29 +62,49 @@ one has a ticket in <a href="https://github.com/t-works/mega-what-it-shows/issue
 <p style="color:var(--muted);font-size:.85rem">5 reports read as a one-day move; filed under <code>parser</code> by tenant.</p>
 <p style="color:var(--muted);font-size:.85rem">The <code>hint</code> reports sit in three tenants: alder.physio 12 · copper.studio 11 · pale.harbour 10.</p>
 
+<h2>The desk closed it</h2>
+<p>On 5 October engineering closed #4471. Two outcomes, and neither is the single fix the ticket
+promised:</p>
+<table>
+  <thead><tr><th>cause</th><th>outcome</th><th>note</th></tr></thead>
+  <tbody>
+    <tr><td><code>parser</code></td><td>fixed</td><td><code>fix(dates): parse dd/mm for eu locales</code></td></tr>
+    <tr><td><code>hint</code></td><td>won't fix</td><td>booking-v3 form retired, so that path has no way in any more</td></tr>
+  </tbody>
+</table>
+<p>The parser fix covers the 379 reports counted under it, the 5 one-day moves among them.
+Whether those 5 were ever the parser is still open: the ticket closed without them being read
+again. The 33 <code>hint</code> reports stay as the record of a bug that no longer has a way in.</p>
+
 <h2>The four tickets</h2>
 <ol>
   <li><b>33 · a second cause, booking-v3's date hint.</b> Day-first tenants who book
     through booking-v3 type the date month first, because the form tells them to. The parser fix
     does not touch them and they have no ticket of their own.
+    Outcome: <b>won't fix</b> — booking-v3 form retired.
     <a href="https://github.com/t-works/mega-what-it-shows/issues/1">#1</a></li>
   <li><b>5 · one-day moves, not month flips.</b> The desk's own note reads these as a
     one-day move. They stay counted under the parser cause until someone decides where they
-    belong. <a href="https://github.com/t-works/mega-what-it-shows/issues/2">#2</a></li>
+    belong. Outcome: <b>closed with #4471</b>, unread to the end.
+    <a href="https://github.com/t-works/mega-what-it-shows/issues/2">#2</a></li>
   <li><b>38 · the intake tag names the wrong cause.</b> 23 parser
     reports are tagged <code>hint</code>, 15 <code>hint</code> reports are tagged
     <code>parser</code>. Intake guesses from the browser; the cause depends on the tenant.
+    Outcome: <b>no fix of its own</b> — the tag is a guess by design.
     <a href="https://github.com/t-works/mega-what-it-shows/issues/3">#3</a></li>
   <li><b>15 · duplicate rows in the export.</b> 427 rows for 412 reports. A
-    count taken from the file is 15 too high. <a href="https://github.com/t-works/mega-what-it-shows/issues/4">#4</a></li>
+    count taken from the file is 15 too high. Outcome: <b>no fix of its own</b> — de-dup by id stays the rule.
+    <a href="https://github.com/t-works/mega-what-it-shows/issues/4">#4</a></li>
 </ol>
 
 <aside class="warn">The 412 is right and the 427 is not. Take the count from this
 page or from <code>uniqueById()</code>, never from the rows.</aside>
 
-<h2>What stays in 4471</h2>
+<h2>What happened to it</h2>
 <p>The parser cause keeps 374 reports after the 5 one-day moves are
-set aside. The queued fix closes those, and nothing else on this page.</p>
+set aside; the fix closes them. The <code>hint</code> reports close with the form that carried
+them, not with a fix. Nothing else here changed the count: the tag column is still wrong on
+38 reports, and the export still repeats 15 rows.</p>
 
 <h2>Lessons</h2>
 <ul>

@@ -2,7 +2,7 @@
 layout: runbook
 title: '#4471 split · 412 reports, four problems'
 owner: support desk
-status: open
+status: closed
 reviewed: 2026-10-28
 signature: v1.eyJzdWIiOiIyMjM2IiwiYXVkIjoiY2hhbGxlbmdlOndoYXQtaXQtc2hvd3MiLCJpYXQiOjE3OTMyMjYyNDAsImV4cCI6MTc5MzMxMjY0MH0.H5qU7ABEL6IxBGrLACFi_egajn_XSaeHneg-AJVgppM
 ---
@@ -21,6 +21,20 @@ one has a ticket in
 
 <IncidentSplit ticket={4471} />
 
+## The desk closed it
+
+On 5 October engineering closed #4471. Two outcomes, and neither is the single fix the ticket
+promised:
+
+| cause | outcome | note |
+|---|---|---|
+| `parser` | fixed | `fix(dates): parse dd/mm for eu locales` |
+| `hint` | won't fix | booking-v3 form retired, so that path has no way in any more |
+
+The parser fix covers the 379 reports counted under it, the 5 one-day moves among them. Whether
+those 5 were ever the parser is still open: the ticket closed without them being read again.
+The 33 `hint` reports stay as the record of a bug that no longer has a way in.
+
 ## What was merged
 
 <CauseTable ticket={4471} />
@@ -30,16 +44,20 @@ one has a ticket in
 1. **33 · a second cause, booking-v3's date hint.** Day-first tenants who book through
    booking-v3 type the date month first, because the form tells them to. The parser fix does
    not touch them and they have no ticket of their own.
+   Outcome: **won't fix** — booking-v3 form retired.
    [#1](https://github.com/t-works/mega-what-it-shows/issues/1)
 2. **5 · one-day moves, not month flips.** The desk's own note reads these as a one-day move.
    They stay counted under the parser cause until someone decides where they belong.
+   Outcome: **closed with #4471**, unread to the end.
    [#2](https://github.com/t-works/mega-what-it-shows/issues/2)
 3. **38 · the intake tag names the wrong cause.** 23 parser reports are tagged `hint`, 15
    `hint` reports are tagged `parser`. Intake guesses from the browser; the cause depends on
    the tenant.
+   Outcome: **no fix of its own** — the tag is a guess by design.
    [#3](https://github.com/t-works/mega-what-it-shows/issues/3)
 4. **15 · duplicate rows in the export.** 427 rows for 412 reports. A count taken from the
    file is 15 too high.
+   Outcome: **no fix of its own** — de-dup by id stays the rule.
    [#4](https://github.com/t-works/mega-what-it-shows/issues/4)
 
 <Callout kind="warn">
@@ -47,10 +65,12 @@ The 412 is right and the 427 is not. Take the count from this page or from `uniq
 never from the rows.
 </Callout>
 
-## What stays in #4471
+## What happened to it
 
-The parser cause keeps 374 reports after the 5 one-day moves are set aside. The queued fix
-closes those, and nothing else on this page.
+The parser cause keeps 374 reports after the 5 one-day moves are set aside; the fix closes
+them. The `hint` reports close with the form that carried them, not with a fix. Nothing else on
+this page changed the count: the tag column is still wrong on 38 reports, and the export still
+repeats 15 rows.
 
 ## Lessons
 

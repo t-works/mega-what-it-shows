@@ -1,0 +1,99 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8">
+<title>4471 split · the support kb</title>
+<style>
+  :root { --ink:#1a1a1a; --muted:#6b6b6b; --line:#dcdcdc; --accent:#3d6b4f; --warn:#a4402a;
+          --warn-bg:#fbeee9; --note-bg:#f2f5f2; }
+  * { box-sizing:border-box; }
+  body { margin:0; padding:2.5rem 1.25rem 4rem; color:var(--ink); background:#fbfaf7;
+         font:16px/1.6 ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif; }
+  main { max-width:760px; margin:0 auto; }
+  .crumb { font:12px/1 ui-monospace, SFMono-Regular, Menlo, monospace; letter-spacing:.08em;
+           text-transform:uppercase; color:var(--muted); }
+  h1 { font-size:1.7rem; line-height:1.25; margin:.6rem 0 1.2rem; }
+  h2 { font-size:1.05rem; margin:2rem 0 .5rem; }
+  p { margin:.7rem 0; }
+  code { font:90%/1.4 ui-monospace, SFMono-Regular, Menlo, monospace; background:#f0efeb;
+         padding:.1em .3em; border-radius:3px; }
+  a { color:#245e8a; }
+  table { width:100%; border-collapse:collapse; margin:1rem 0; font-size:.94rem; }
+  th, td { text-align:left; padding:.5rem .6rem; border-bottom:1px solid var(--line); vertical-align:top; }
+  th { font:12px/1.2 ui-monospace, SFMono-Regular, Menlo, monospace; letter-spacing:.06em;
+       text-transform:uppercase; color:var(--muted); }
+  td.num { font-variant-numeric:tabular-nums; }
+  tr.wrong td { background:var(--warn-bg); }
+  tr.wrong td:last-child { color:var(--warn); font-weight:600; }
+  .sum { font-size:1.06rem; margin:.4rem 0 0; }
+  aside { border-left:4px solid var(--accent); padding:.6rem 1rem; margin:1.4rem 0;
+          background:var(--note-bg); }
+  aside.warn { border-color:var(--warn); background:var(--warn-bg); }
+  ol { padding-left:1.2rem; }
+  li { margin:.6rem 0; }
+  .stamp { margin:2.2rem 0 0; font:.85rem ui-monospace, SFMono-Regular, Menlo, monospace; color:var(--muted); }
+  .stamp b { color:var(--accent); letter-spacing:.04em; }
+</style></head>
+<body><main>
+<div class="crumb">support kb · incidents · 4471</div>
+<h1>4471 split · 412 reports, four problems</h1>
+<p>4471 was merged on subject lines and marked known with one fix queued. It holds 412 unique
+reports in 427 exported rows, and four problems rather than one. This page splits them. Each
+one has a ticket in <a href="https://github.com/t-works/mega-what-it-shows/issues">mega-what-it-shows</a>.</p>
+
+<p class="sum"><b>412</b> unique reports in #4471 · <b>427</b> rows in the export · <b>2</b> causes</p>
+<table>
+  <thead><tr><th>problem</th><th>reports</th><th>where it sits</th></tr></thead>
+  <tbody>
+    <tr class="wrong"><td>second cause: booking-v3 date hint</td><td class="num">33</td><td>no ticket of its own</td></tr>
+    <tr><td>one-day moves read as flips</td><td class="num">5</td><td>counted under parser</td></tr>
+    <tr><td>intake tag names the wrong cause</td><td class="num">38</td><td>metadata, both causes</td></tr>
+    <tr><td>duplicate rows in the export</td><td class="num">15</td><td>outside the unique count</td></tr>
+  </tbody>
+</table>
+
+<h2>What was merged</h2>
+<p class="sum"><b>412</b> reports merged into #4471 · <b>2</b> causes</p>
+<table>
+  <thead><tr><th>cause</th><th>reports</th><th>tagged as</th><th>tenants</th><th></th></tr></thead>
+  <tbody>
+    <tr><td><code>parser</code></td><td class="num">379</td><td>parser ×356 · hint ×23</td><td class="num">11</td><td>#4471</td></tr>
+    <tr class="wrong"><td><code>hint</code></td><td class="num">33</td><td>parser ×15 · hint ×18</td><td class="num">3</td><td>not this ticket — no ticket of its own</td></tr>
+  </tbody>
+</table>
+<p style="color:var(--muted);font-size:.85rem">5 reports read as a one-day move; filed under <code>parser</code> by tenant.</p>
+<p style="color:var(--muted);font-size:.85rem">The <code>hint</code> reports sit in three tenants: alder.physio 12 · copper.studio 11 · pale.harbour 10.</p>
+
+<h2>The four tickets</h2>
+<ol>
+  <li><b>33 · a second cause, booking-v3's date hint.</b> Day-first tenants who book
+    through booking-v3 type the date month first, because the form tells them to. The parser fix
+    does not touch them and they have no ticket of their own.
+    <a href="https://github.com/t-works/mega-what-it-shows/issues/1">#1</a></li>
+  <li><b>5 · one-day moves, not month flips.</b> The desk's own note reads these as a
+    one-day move. They stay counted under the parser cause until someone decides where they
+    belong. <a href="https://github.com/t-works/mega-what-it-shows/issues/2">#2</a></li>
+  <li><b>38 · the intake tag names the wrong cause.</b> 23 parser
+    reports are tagged <code>hint</code>, 15 <code>hint</code> reports are tagged
+    <code>parser</code>. Intake guesses from the browser; the cause depends on the tenant.
+    <a href="https://github.com/t-works/mega-what-it-shows/issues/3">#3</a></li>
+  <li><b>15 · duplicate rows in the export.</b> 427 rows for 412 reports. A
+    count taken from the file is 15 too high. <a href="https://github.com/t-works/mega-what-it-shows/issues/4">#4</a></li>
+</ol>
+
+<aside class="warn">The 412 is right and the 427 is not. Take the count from this
+page or from <code>uniqueById()</code>, never from the rows.</aside>
+
+<h2>What stays in 4471</h2>
+<p>The parser cause keeps 374 reports after the 5 one-day moves are
+set aside. The queued fix closes those, and nothing else on this page.</p>
+
+<h2>Lessons</h2>
+<ul>
+  <li>A subject line is not a cause. Merging on one put a second bug inside a known ticket, and
+    the ticket still says one issue.</li>
+  <li>A guessed field becomes a fact the moment a page prints it. The tag column has been wrong
+    on 38 reports.</li>
+  <li>Count reports once: by id, not by row.</li>
+</ul>
+
+<p class="stamp">desk ref <b>DR-RFAF-JTKE</b></p>
+</main></body></html>

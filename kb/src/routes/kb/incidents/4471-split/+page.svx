@@ -1,0 +1,63 @@
+---
+layout: runbook
+title: '#4471 split · 412 reports, four problems'
+owner: support desk
+status: open
+reviewed: 2026-10-28
+signature: v1.eyJzdWIiOiIyMjM2IiwiYXVkIjoiY2hhbGxlbmdlOndoYXQtaXQtc2hvd3MiLCJpYXQiOjE3OTMyMjYyNDAsImV4cCI6MTc5MzMxMjY0MH0.H5qU7ABEL6IxBGrLACFi_egajn_XSaeHneg-AJVgppM
+---
+
+<script>
+  import IncidentSplit from '#lib/kb/IncidentSplit.svelte';
+  import CauseTable from '#lib/kb/CauseTable.svelte';
+  import Callout from '#lib/kb/Callout.svelte';
+  import RenderStamp from '#lib/kb/RenderStamp.svelte';
+</script>
+
+#4471 was merged on subject lines and marked known with one fix queued. It holds 412 unique
+reports in 427 exported rows, and four problems rather than one. This page splits them. Each
+one has a ticket in
+[mega-what-it-shows](https://github.com/t-works/mega-what-it-shows/issues).
+
+<IncidentSplit ticket={4471} />
+
+## What was merged
+
+<CauseTable ticket={4471} />
+
+## The four tickets
+
+1. **33 · a second cause, booking-v3's date hint.** Day-first tenants who book through
+   booking-v3 type the date month first, because the form tells them to. The parser fix does
+   not touch them and they have no ticket of their own.
+   [#1](https://github.com/t-works/mega-what-it-shows/issues/1)
+2. **5 · one-day moves, not month flips.** The desk's own note reads these as a one-day move.
+   They stay counted under the parser cause until someone decides where they belong.
+   [#2](https://github.com/t-works/mega-what-it-shows/issues/2)
+3. **38 · the intake tag names the wrong cause.** 23 parser reports are tagged `hint`, 15
+   `hint` reports are tagged `parser`. Intake guesses from the browser; the cause depends on
+   the tenant.
+   [#3](https://github.com/t-works/mega-what-it-shows/issues/3)
+4. **15 · duplicate rows in the export.** 427 rows for 412 reports. A count taken from the
+   file is 15 too high.
+   [#4](https://github.com/t-works/mega-what-it-shows/issues/4)
+
+<Callout kind="warn">
+The 412 is right and the 427 is not. Take the count from this page or from `uniqueById()`,
+never from the rows.
+</Callout>
+
+## What stays in #4471
+
+The parser cause keeps 374 reports after the 5 one-day moves are set aside. The queued fix
+closes those, and nothing else on this page.
+
+## Lessons
+
+- A subject line is not a cause. Merging on one put a second bug inside a known ticket, and
+  the ticket still says one issue.
+- A guessed field becomes a fact the moment a page prints it. The tag column has been wrong on
+  38 reports.
+- Count reports once: by id, not by row.
+
+<RenderStamp {signature} />
